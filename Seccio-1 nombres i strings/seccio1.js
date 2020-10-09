@@ -1,3 +1,4 @@
+//var valor = document.getElementById("input1").value; 
 /**
  * 01 Numero signe
  * Escriu un codi que indiqui si un nombre introduït per l’usuari és positiu, negatiu o igual a 0
@@ -24,7 +25,15 @@ function numeroSigne() {
  * Escriu un codi que verifiqui si el que introdueix l’usuari en una casella és un nombre
 */
 function esNumero() {
+    let valor = document.getElementById("input1").value;
 
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    }else if (isFinite(valor)){
+        document.getElementById("results").innerHTML = "Es un nombre";
+    }else{
+        document.getElementById("results").innerHTML = "No es un nombre";
+    }
 }
 
 /**
