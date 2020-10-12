@@ -1,4 +1,3 @@
-//var valor = document.getElementById("input1").value; 
 /**
  * 01 Numero signe
  * Escriu un codi que indiqui si un nombre introduït per l’usuari és positiu, negatiu o igual a 0
@@ -15,7 +14,7 @@ function numeroSigne() {
         document.getElementById("results").innerHTML = "ES NEGATIU";
     } else if (valor == 0) {
         document.getElementById("results").innerHTML = "ES ZERO";
-    }else {
+    } else {
         document.getElementById("results").innerHTML = "La dada introduida no es un nombre";
     }
 }
@@ -29,9 +28,9 @@ function esNumero() {
 
     if (valor == null || valor.length == 0) {
         alert("per favor, indica un valor");
-    }else if (isFinite(valor)){
+    } else if (isFinite(valor)) {
         document.getElementById("results").innerHTML = "Es un nombre";
-    }else{
+    } else {
         document.getElementById("results").innerHTML = "No es un nombre";
     }
 }
@@ -42,7 +41,14 @@ function esNumero() {
  * Exemple:  3.1515 →  3
 */
 function numeroEnter() {
-
+    let valor = document.getElementById("input1").value;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else if (!isFinite(valor)) {
+        document.getElementById("results").innerHTML = "El valor indicat no es un nombre, per favor, indica un nombre.";
+    } else {
+        document.getElementById("results").innerHTML = parseInt(valor);
+    }
 }
 
 /**
@@ -51,7 +57,14 @@ function numeroEnter() {
  * Ex:   3.1415 →  1415
 */
 function numeroDicemals() {
-
+    let valor = document.getElementById("input1").value;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else if (!isFinite(valor)) {
+        document.getElementById("results").innerHTML = "El valor indicat no es un nombre, per favor, indica un nombre.";
+    } else {
+        document.getElementById("results").innerHTML = parseFloat(valor) % 1;
+    }
 }
 
 /**
@@ -59,7 +72,15 @@ function numeroDicemals() {
  * Escriu un codi que divideixi per 19 el número introduït i mostri el resultat exactament amb 3 decimals
 */
 function tresDecimals() {
-
+    let valor = document.getElementById("input1").value;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else if (!isFinite(valor)) {
+        document.getElementById("results").innerHTML = "El valor indicat no es un nombre, per favor, indica un nombre.";
+    } else {
+        let res = valor / 19;
+        document.getElementById("results").innerHTML = res.toFixed(3);
+    }
 }
 
 /**
@@ -67,7 +88,10 @@ function tresDecimals() {
  * Escriu un codi que digui si un string és buit o no
 */
 function stringBuit() {
-
+    let valor = document.getElementById("input1").value;
+    if (valor === ""){
+        document.getElementById("results").innerHTML = "está buit";
+    }
 }
 
 /**
@@ -75,7 +99,7 @@ function stringBuit() {
  * Exemple:  casa →  asac
 */
 function invertirString() {
-
+    let valor = document.getElementById("input1").value;
 }
 
 /**
@@ -83,7 +107,7 @@ function invertirString() {
  * Escriu un codi que compti el número d’ocurrències de la lletra “a” que hi ha en un string
 */
 function comptarA() {
-
+    let valor = document.getElementById("input1").value;
 }
 
 /**
@@ -92,6 +116,7 @@ function comptarA() {
  * Exemple:  “Ordinador personal”  →  “Ordin”
 */
 function abansA() {
+    let valor = document.getElementById("input1").value;
 
 }
 
@@ -100,7 +125,7 @@ function abansA() {
  * Escriu un codi que retorni en quina posició se troba la primera i l'última ocurrència de la lletra “a” en un string
 */
 function primeraDarrera() {
-
+    let valor = document.getElementById("input1").value;
 }
 
 /**
@@ -109,6 +134,7 @@ function primeraDarrera() {
  * Exemple:  “Es la artista mas aclamada”  →  “Es  artista mas acmada”
 */
 function esborraSubstring() {
+    let valor = document.getElementById("input1").value;
 
 }
 
@@ -117,7 +143,7 @@ function esborraSubstring() {
  * Escriu un codi que substitueixi totes les ocurrències de “la” a dins d’un String per un asterisc 
 */
 function subsString() {
-
+    let valor = document.getElementById("input1").value;
 }
 
 /**
@@ -126,7 +152,7 @@ function subsString() {
  * Exemple  “hola”  →  “hholah”
 */
 function capCua() {
-
+    let valor = document.getElementById("input1").value;
 }
 
 /**
@@ -135,7 +161,7 @@ function capCua() {
  * Exemple:  “    aixo es una prova    ” → “aixoesunaprova”
 */
 function eliminarEspais() {
-
+    let valor = document.getElementById("input1").value;
 }
 
 /**
@@ -144,7 +170,7 @@ function eliminarEspais() {
  * Exemple:     “aixo es       una   prova”  →  “aixo-es-una-prova”
 */
 function fraseGuions() {
-
+    let valor = document.getElementById("input1").value;
 }
 
 /**
@@ -153,7 +179,7 @@ function fraseGuions() {
  * Exemple:  “alguns cans miren enfora”   →   “ACME”
 */
 function constAcronim() {
-
+    let valor = document.getElementById("input1").value;
 }
 
 /**
@@ -165,5 +191,5 @@ iii. L'extensió està després de la @, no abans. No val emprar expressions reg
 Exemple:  abcd@abcd.org  →  Sí es una direcció de correu
 */
 function validarEmail() {
-
+    let valor = document.getElementById("input1").value;
 }
