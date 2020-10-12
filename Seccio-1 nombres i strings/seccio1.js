@@ -90,16 +90,36 @@ function tresDecimals() {
 function stringBuit() {
     let valor = document.getElementById("input1").value;
     if (valor === ""){
-        document.getElementById("results").innerHTML = "está buit";
+        document.getElementById("results").innerHTML = "Està buit";
+    } else if (valor.trim() === ""){
+        document.getElementById("results").innerHTML = "Només s'han carregat espais en blanc, el string está buit";
+    } else {
+        document.getElementById("results").innerHTML = "No està buit";
     }
 }
 
 /**
- * 07 Invertir string   Escriu un codi que inverteixi un string. 
+ * 07 Invertir string
+ * Escriu un codi que inverteixi un string. 
  * Exemple:  casa →  asac
+ * Step by step explanation:
+ * Step 1. Use the split() method to return a new array
+ * var splitString = str.split(""); // var splitString = "hello".split("");
+ * ["h", "e", "l", "l", "o"]
+ * Step 2. Use the reverse() method to reverse the new created array
+ * var reverseArray = splitString.reverse(); // var reverseArray = ["h", "e", "l", "l", "o"].reverse();
+ * ["o", "l", "l", "e", "h"]
+ * Step 3. Use the join() method to join all elements of the array into a string
+ * var joinArray = reverseArray.join(""); // var joinArray = ["o", "l", "l", "e", "h"].join("");
+ * "olleh"
 */
 function invertirString() {
     let valor = document.getElementById("input1").value;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        document.getElementById("results").innerHTML = valor.split("").reverse().join("");
+    }
 }
 
 /**
@@ -108,6 +128,17 @@ function invertirString() {
 */
 function comptarA() {
     let valor = document.getElementById("input1").value;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        let countA = 0;
+        for (let i = 0; i < valor.length ; i++){
+            if (valor.toUpperCase().charAt(i) == "A"){
+                countA++;
+            }
+        }
+        document.getElementById("results").innerHTML = "En el string carregat hi ha " + countA + " lletres a."
+    }
 }
 
 /**
@@ -117,7 +148,12 @@ function comptarA() {
 */
 function abansA() {
     let valor = document.getElementById("input1").value;
-
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        let positionA = valor.toUpperCase().indexOf("A");
+        document.getElementById("results").innerHTML = valor.slice(0,positionA);
+    }
 }
 
 /**
@@ -126,6 +162,25 @@ function abansA() {
 */
 function primeraDarrera() {
     let valor = document.getElementById("input1").value;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        let primera = valor.toUpperCase().indexOf("A");
+        let darrera = valor.length-1;
+        // busco la última a empezando por el final de la string
+        for (let i = darrera;i>=0; i--){
+            if (valor.toUpperCase().charAt(i) == "A"){
+                darrera = i;
+                break;
+            }
+        }
+        if (darrera != primera){
+            document.getElementById("results").innerHTML = "La primera a es troba en la posició: "
+            + primera + " y la darerra en la posició: " + darrera;
+        } else {
+            document.getElementById("results").innerHTML = "Només hi ha una lletra A i està en la posició " + primera;
+        }
+    }
 }
 
 /**
@@ -135,7 +190,12 @@ function primeraDarrera() {
 */
 function esborraSubstring() {
     let valor = document.getElementById("input1").value;
-
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        // /g --> para sustituir todas e /i para que no tenga en cuenta el case
+        document.getElementById("results").innerHTML = valor.replace(/LA/gi,"");
+    }
 }
 
 /**
@@ -144,6 +204,11 @@ function esborraSubstring() {
 */
 function subsString() {
     let valor = document.getElementById("input1").value;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        document.getElementById("results").innerHTML = valor.replace(/LA/gi,"*");
+    }
 }
 
 /**
