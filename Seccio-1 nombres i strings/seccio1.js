@@ -213,11 +213,20 @@ function subsString() {
 
 /**
  * 13 Cap i cua
- * Escriu un codi que donat un String, creï un nou string a partir del primer en el qual se li hagi afegit al principi i al final la primera lletra d’aquell string.
+ * Escriu un codi que donat un String, creï un nou string a partir del primer
+ * en el qual se li hagi afegit al principi i al final la primera lletra d’aquell string.
  * Exemple  “hola”  →  “hholah”
 */
 function capCua() {
     let valor = document.getElementById("input1").value;
+    let primera = null;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        primera = valor.charAt(0);
+        valor = primera + valor + primera;
+        document.getElementById("results").innerHTML = valor;
+    }
 }
 
 /**
@@ -227,15 +236,26 @@ function capCua() {
 */
 function eliminarEspais() {
     let valor = document.getElementById("input1").value;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        document.getElementById("results").innerHTML = valor.trim().split(" ").join("");
+    }
 }
 
 /**
  * 15 frase amb guions
- * Escriu un codi que converteixi un String format per paraules separades per un o varis espais en un String en què les paraules estiguin separades per un guió. 
+ * Escriu un codi que converteixi un String format per paraules separades per un o
+ * varis espais en un String en què les paraules estiguin separades per un guió. 
  * Exemple:     “aixo es       una   prova”  →  “aixo-es-una-prova”
 */
 function fraseGuions() {
     let valor = document.getElementById("input1").value;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        document.getElementById("results").innerHTML = valor.split(" ").join("-");
+    }
 }
 
 /**
