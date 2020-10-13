@@ -294,33 +294,36 @@ function validarEmail() {
     let valid = true;
     let arroba = null;
     let extensio = valor.substr(valor.length-5);
-    //validació @
-    if (valor.indexOf("@") != -1){
-        for (let i = valor.indexOf("@"); i < valor.length; i++){
-            if (valor.charAt(i) == '@'){
-                arroba++;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        //validació @
+        if (valor.indexOf("@") != -1){
+            for (let i = valor.indexOf("@"); i < valor.length; i++){
+                if (valor.charAt(i) == '@'){
+                    arroba++;
+                }
+                if (arroba > 1){
+                    valid = false;
+                    break;
+                }
             }
-            if (arroba > 1){
+            //validació extensió
+            if (valid && valor.lastIndexOf(".net") == -1 && valor.lastIndexOf(".org") == -1 && valor.lastIndexOf(".com") == -1){
                 valid = false;
-                break;
             }
-        }
-        //validació extensió
-        if (valid && valor.lastIndexOf(".net") == -1 && valor.lastIndexOf(".org") == -1 && valor.lastIndexOf(".com") == -1){
+            //ultima posición
+            if (valid && valor.lastIndexOf(".net") < valor.length-5 && valor.lastIndexOf(".org") < valor.length-5 && valor.lastIndexOf(".com") < valor.length-5){
+                valid = false;
+            }
+            //validación que després de @ no ve seguidamente l'extensió, ya que no seria correcta
+            if (extensio.charAt(0) == "@"){
+                valid = false;
+            }
+        }else{
             valid = false;
         }
-        //ultima posición
-        if (valid && valor.lastIndexOf(".net") < valor.length-5 && valor.lastIndexOf(".org") < valor.length-5 && valor.lastIndexOf(".com") < valor.length-5){
-            valid = false;
-        }
-        //validación que després de @ no ve seguidamente l'extensió, ya que no seria correcta
-        if (extensio.charAt(0) == "@"){
-            valid = false;
-        }
-    }else{
-        valid = false;
     }
-
     if(valid){
         document.getElementById("results").innerHTML = "Si és un correu eletrònic";
     }else{
