@@ -254,7 +254,7 @@ function fraseGuions() {
     if (valor == null || valor.length == 0) {
         alert("per favor, indica un valor");
     } else {
-        document.getElementById("results").innerHTML = valor.split(" ").join("-");
+        document.getElementById("results").innerHTML = valor.trim().split(" ").join("-");
     }
 }
 
@@ -265,6 +265,20 @@ function fraseGuions() {
 */
 function constAcronim() {
     let valor = document.getElementById("input1").value;
+    var paraules,acronim = null;
+    if (valor == null || valor.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        paraules = valor.trim().split(" ");
+        for (paraula of paraules) {
+            if (paraula == paraules[0]){
+                acronim = paraula.charAt(0);
+            } else{
+                acronim += paraula.charAt(0);
+            }
+        }
+        document.getElementById("results").innerHTML = acronim;
+    }
 }
 
 /**
@@ -277,4 +291,39 @@ Exemple:  abcd@abcd.org  →  Sí es una direcció de correu
 */
 function validarEmail() {
     let valor = document.getElementById("input1").value;
+    let valid = true;
+    let arroba = null;
+    let extensio = valor.substr(valor.length-5);
+    //validació @
+    if (valor.indexOf("@") != -1){
+        for (let i = valor.indexOf("@"); i < valor.length; i++){
+            if (valor.charAt(i) == '@'){
+                arroba++;
+            }
+            if (arroba > 1){
+                valid = false;
+                break;
+            }
+        }
+        //validació extensió
+        if (valid && valor.lastIndexOf(".net") == -1 && valor.lastIndexOf(".org") == -1 && valor.lastIndexOf(".com") == -1){
+            valid = false;
+        }
+        //ultima posición
+        if (valid && valor.lastIndexOf(".net") < valor.length-5 && valor.lastIndexOf(".org") < valor.length-5 && valor.lastIndexOf(".com") < valor.length-5){
+            valid = false;
+        }
+        //validación que després de @ no ve seguidamente l'extensió, ya que no seria correcta
+        if (extensio.charAt(0) == "@"){
+            valid = false;
+        }
+    }else{
+        valid = false;
+    }
+
+    if(valid){
+        document.getElementById("results").innerHTML = "Si és un correu eletrònic";
+    }else{
+        document.getElementById("results").innerHTML = "No és un correu eletrònic";
+    }
 }
