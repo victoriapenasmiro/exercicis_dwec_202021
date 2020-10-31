@@ -330,3 +330,256 @@ function validarEmail() {
         document.getElementById("results").innerHTML = "No és un correu eletrònic";
     }
 }
+
+/**
+ * Exercicis arrays
+ * 01 - Crea un codi JS que ordeni un Array de Strings alfabèticament
+ */
+function strOrdenaMajor(){
+    let llista = document.getElementById("input1").value;
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        document.getElementById("results").innerHTML = llista.split(",").sort();;
+    }
+}
+
+/**
+ * 02 - Ordena de menor a major un array de números
+ */
+function numOrdenaMajor(){
+    let llista = document.getElementById("input1").value;
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        document.getElementById("results").innerHTML = llista.split(",").sort(function(a, b){return a-b});
+    }
+}
+
+/**
+ * 03 - Ordena de major a menor un array de números
+ */
+function numOrdenaMenor(){
+    let llista = document.getElementById("input1").value;
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        document.getElementById("results").innerHTML = llista.split(",").sort(function(a, b){return b-a});
+    }
+}
+
+/**
+ * 04 - Crea un codi JS que ordeni un Array de Strings de manera que aquells elements amb
+ * strings més llargs estiguin davant.
+ * Exemple: [“kiwi”,”apple”,”strawberry”]  →  [“strawberry”,”apple”,”kiwi”]
+ */
+function strOrdenaPerLong(){
+    let sortByLength = function (a, b) {
+        return a.length - b.length;
+      };
+    let llista = document.getElementById("input1").value;
+
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        document.getElementById("results").innerHTML = llista.split(",").sort(sortByLength);
+    }
+}
+
+/**
+ * 05 - Crea un codi JS que a partir d’un Array de Strings obtengui un array paral·lel
+ * amb les longituts dels elements.
+ * Exemple: [“kiwi”,”apple”,”strawberry”]  →  [4, 5, 9]
+ */
+function strArrayLongituds(){
+    let llista = document.getElementById("input1").value;
+    let newLlista = new Array();
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        llista.split(",").forEach(element => newLlista.push(element.length));
+        document.getElementById("results").innerHTML = newLlista;
+    }
+}
+
+/**
+ * 06 - Escriu un codi JS que en passar-li un array de paraules,
+ * crei un String amb aquestes paraules separades per espais,
+ * però sense afegir guions al principi i al final del String
+ * Exemple:  [“hola”, “que”, “tal”]    →   “hola-que-tal”
+ */
+function strCreaFraseGuions(){
+    let llista = document.getElementById("input1").value.split(" ");
+    let newValor = null;
+    let valor = function concat(element, index, array){
+        if (index == 0){
+            newValor = element;
+        } else {
+            newValor += "-" + element;
+        }
+    }
+
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        llista.forEach(valor);
+        document.getElementById("results").innerHTML = newValor;
+    }
+}
+
+/**
+ * 07 - Fer un codi que agafi totes les paraules d’un Array de Strings i
+ * construeixi un acrònim en majúscules. 
+ * Exemple:  [“alguns”, “cans”, “miren”, “enfora”]  →  “ACME”
+ */
+function strCreaAcronim(){
+    let llista = document.getElementById("input1").value.split(" ");
+    let newValor = "";
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        llista.forEach(valor => newValor += valor.charAt(0).toUpperCase());
+        document.getElementById("results").innerHTML = newValor;
+    }
+}
+
+/**
+ * 08 - Escriu un codi JS que elimini d’un Array de Strings
+ * tots aquells elements que tenguin una longitud inferior a 5
+ */
+function strFiltreLongitud(){
+    let llista = document.getElementById("input1").value.split(" ");
+    
+    /*Al eliminar un elemento de la array, todo los elementos se mueven una posición
+    por lo que al eliminar un elemento, hay que mover el indice una posición atras.*/
+
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        for (let i = 0; i < llista.length; i++){
+            if (llista[i].length < 5){
+                llista.splice(i,1);
+                i = i - 1;
+            }
+        }
+        document.getElementById("results").innerHTML = llista;
+    }
+}
+
+/**
+ * 09 - Obtén la suma total d’un array de números emprant el mètode forEach()
+ */
+function numSumaForeach(){
+    let llista = document.getElementById("input1").value.split(" ");
+    let total = 0;
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        llista.forEach( valor => total += parseInt(valor));
+        document.getElementById("results").innerHTML = total;
+    }
+
+}
+
+/**
+ * 10 - Escriu un codi JS que calculi el número de vegades que apareix exactament
+ * l’string “la” en un array.
+ * Exemple:  [“la”, “o”, “lama”, “t”, “la”, “bela”] → 2
+ */
+function strOcurrencies(){
+    let llista = document.getElementById("input1").value.split(" ");
+    let total = 0;
+    let calcularTotal = function (valor) {
+        if (valor == "la"){
+            total++;
+        }
+    }
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        llista.forEach(calcularTotal);
+        document.getElementById("results").innerHTML = total;
+    }
+}
+/**
+ * 11 - Obtén la suma total d’un array de números emprant el mètode reduce()
+ * 
+ * @see https://stackoverflow.com/questions/15677869/how-to-convert-a-string-of-numbers-to-an-array-of-numbers
+ */
+function numSumaReduce(){
+    /* Elimino espacios de la string antes de convertir a array porqué si existe un espacio al principio
+    o al final, ocupa una posicion de la array, y al intentar sumar un numero a vacío devuelve NaN. */
+    let llista = document.getElementById("input1").value.trim().split(" ").map(function(num){
+        return parseInt(num);
+    });
+
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        document.getElementById("results").innerHTML = llista.reduce(sumaTots);
+    }
+    
+    function sumaTots(total, num) {
+        return total + num;
+    }
+}
+
+/**
+ * 12 - Obté el valor numèric més alt d’un array emprant forEach
+ */
+function numMaxForeach(){
+    let llista = document.getElementById("input1").value.split(" ");
+    let valorMax = 0;
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        llista.forEach(function(valor){
+            if (parseInt(valor) > valorMax){
+                valorMax = parseInt(valor);
+            }
+        });
+        document.getElementById("results").innerHTML = valorMax;
+    }
+}
+
+/**
+ * 13 - Escriu un codi JS que creï un Array nou agafant el primer i el darrer element d’un Array
+ * i col·locant-los al centre de l’Array.
+ * (Per fer aquest exercici, donarem per suposat que sempre se tractarà d’un Array
+ * amb un número parell de posicions)
+ * Exemple:  [“a”, “b”, “c”, “d”, “e”, “f”]   →    [“b”, “c”, “a”, “f”, “d”, “e”,]
+ */
+function restructuraArray(){
+    let llista = document.getElementById("input1").value.split(" ");
+    let primero = llista.shift();//elimino el primer valor
+    let ultimo = llista.pop();//elimino el ultimo valor
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else {
+        llista.splice((llista.length/2),0,primero);
+        llista.splice((llista.length/2)+0.5,0,ultimo);
+        document.getElementById("results").innerHTML = llista;
+    }
+}
+
+/**
+ * Escriu un codi JS que donat un array de números, retalli els tres primers elements de l’array
+ * i els col·loqui al final en ordre invertit.
+ * Exemple:  [1,5,8,3,4]  → [3,4,8,5,1]
+ */
+function capCuaArray(){
+    let llista = document.getElementById("input1").value.split(" ");
+    let tresNum = new Array();
+    if (llista == null || llista.length == 0) {
+        alert("per favor, indica un valor");
+    } else if (llista.length < 4){
+        alert("per favor, al manco has d'indicar 4 nombres");
+    } else {
+        for (let i = 0; i < 3; i++){
+            tresNum.push(llista[i]);
+        }
+        llista.splice(0,3); //elimino los tres primeros numeros
+        llista.push(tresNum.reverse()); //añado los tres num al final
+        document.getElementById("results").innerHTML = llista;
+    }
+}
