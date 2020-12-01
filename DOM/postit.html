@@ -1,0 +1,123 @@
+<!-- Crea una aplicació que, tal i com mostrarà el professor a classe,
+    permet crear una sèrie de Postits.
+
+Per fer aquesta aplicació, has d’emprar un fitxer HTML normal però amb el <body> buid.
+O sigui que has de crear tots els tags de dins el body amb JS.
+El CSS també s’ha d’afegir emprant JS-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      var incremental = 0;
+      window.onload = function () {
+        let body = document.getElementsByTagName("body")[0];
+        let sec1 = document.createElement("section");
+        sec1.style["margin-bottom"] = "20px";
+        body.appendChild(sec1);
+
+        let input = document.createElement("input");
+        input.type = "text";
+        input.style.width = "25%";
+        sec1.appendChild(input);
+        let btn = document.createElement("button");
+        btn.innerHTML = "add postit";
+        btn.onclick = function () {
+          incremental++;
+          let contenedor = document.createElement("div");
+          contenedor.style.width = "150px";
+          contenedor.style.height = "150px";
+          contenedor.style.padding = "5px";
+          contenedor.style.margin = "10px";
+          contenedor.style.backgroundColor = "blue";
+          contenedor.style.order = incremental;
+          section.appendChild(contenedor);
+
+          let nav = document.createElement("header");
+          nav.style.position = "relative";
+          let check = document.createElement("input");
+          check.type = "checkbox";
+          nav.appendChild(check);
+
+          let cerrar = document.createElement("span");
+          cerrar.innerHTML = "X";
+          cerrar.style.position = "absolute";
+          cerrar.style.right = "5px";
+          cerrar.addEventListener("click", function () {
+            this.parentNode.parentNode.remove();
+          });
+          nav.appendChild(cerrar);
+
+          contenedor.appendChild(nav);
+
+          let valor = document.getElementsByTagName("input")[0].value;
+          let nota = document.createElement("p");
+          nota.innerHTML = valor;
+          nota.addEventListener("click", intercambio);
+          contenedor.appendChild(nota);
+        };
+        sec1.appendChild(btn);
+        let section = document.createElement("section");
+        section.style.display = "flex";
+        section.style.flexWrap = "wrap";
+        body.appendChild(section);
+        let colores = document.createElement("select");
+        colores.style.display = "block";
+        colores.style["margin-top"] = "20px";
+        let rojo = document.createElement("option");
+        rojo.value = "red";
+        rojo.innerHTML = "red";
+        colores.appendChild(rojo);
+        let verde = document.createElement("option");
+        verde.value = "green";
+        verde.innerHTML = "green";
+        colores.appendChild(verde);
+        let azul = document.createElement("option");
+        azul.value = "blue";
+        azul.innerHTML = "blue";
+        colores.appendChild(azul);
+        sec1.appendChild(colores);
+        let btnChange = document.createElement("button");
+        btnChange.innerHTML = "Change color";
+        btnChange.addEventListener("click", cambiarColor);
+        sec1.appendChild(btnChange);
+      };
+
+      function cambiarColor() {
+        let newColor = document.getElementsByTagName("select")[0].value;
+        let postits = document
+          .getElementsByTagName("section")[1]
+          .getElementsByTagName("input");
+        let optionsList = Array.prototype.slice.call(postits);
+        optionsList.forEach(function (param) {
+          console.log(param);
+
+          if (param.checked) {
+            console.log("estoy seleccionado");
+            param.parentNode.parentNode.style.backgroundColor = newColor;
+          }
+        });
+      }
+
+      function intercambio() {
+        let old = this.parentNode.style.order;
+        let postits = document
+          .getElementsByTagName("section")[1]
+          .getElementsByTagName("div").length;
+        let sig = this.parentNode.nextSibling.style.order;
+        if (old == 1) {
+          this.parentNode.style.order = postits;
+        } else {
+          /* this.parentNode.style.order = Number(old) + 1;
+           */ //todo no se puede trabajar con order, hay que buscar la posición en el html.
+          this.parentNode.style.order = sig;
+          this.parentNode.nextSibling.style.order = old;
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

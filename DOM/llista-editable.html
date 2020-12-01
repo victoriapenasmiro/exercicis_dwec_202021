@@ -1,0 +1,46 @@
+<!-- ENUNCIADO: Crea una llista ordenada com la de la imatge en un
+    fitxer anomenat llista-editable.html que contengui el codi js dins de l’etiqueta <script>
+
+Per fer aquesta aplicació, has d’emprar un fitxer HTML normal però amb el <body> buid.
+O sigui que has de crear tots els tags de dins el body amb JS. El CSS també s’ha d’afegir emprant JS
+
+* En espitjar el botó Delete, se borra aquell element de la llista ordenada
+* En espitjar Afegeix, se crea un element en la llista (per sota) amb el text que hem introduït en  <input>
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        let body = document.getElementsByTagName("body")[0];
+        let input = document.createElement("input");
+        input.type = "text";
+        body.appendChild(input);
+        let btn = document.createElement("button");
+        btn.innerHTML = "add <code>&lt;li&gt;</code> element";
+        btn.onclick = function addItem() {
+            let valor = input.value;
+            let item = document.createElement("li");
+            item.innerHTML = valor;
+            let btnEliminar = document.createElement("button");
+            btnEliminar.innerHTML = "Eliminar";
+            btnEliminar.addEventListener('click',rmItem);
+            item.appendChild(btnEliminar);
+            llista.appendChild(item);
+        };
+        body.appendChild(btn);
+        let llista = document.createElement("ol");
+        body.appendChild(llista);
+      };
+
+      function rmItem(){
+          this.parentNode.remove();
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
