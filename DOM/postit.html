@@ -12,7 +12,6 @@ El CSS també s’ha d’afegir emprant JS-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script>
-      var incremental = 0;
       window.onload = function () {
         let body = document.getElementsByTagName("body")[0];
         let sec1 = document.createElement("section");
@@ -26,14 +25,12 @@ El CSS també s’ha d’afegir emprant JS-->
         let btn = document.createElement("button");
         btn.innerHTML = "add postit";
         btn.onclick = function () {
-          incremental++;
           let contenedor = document.createElement("div");
           contenedor.style.width = "150px";
           contenedor.style.height = "150px";
           contenedor.style.padding = "5px";
           contenedor.style.margin = "10px";
           contenedor.style.backgroundColor = "blue";
-          contenedor.style.order = incremental;
           section.appendChild(contenedor);
 
           let nav = document.createElement("header");
@@ -103,20 +100,32 @@ El CSS també s’ha d’afegir emprant JS-->
       }
 
       function intercambio() {
-        let old = this.parentNode.style.order;
         let postits = document
           .getElementsByTagName("section")[1]
-          .getElementsByTagName("div").length;
-        let sig = this.parentNode.nextSibling.style.order;
-        if (old == 1) {
-          this.parentNode.style.order = postits;
+          .getElementsByTagName("div");
+        let posicion = obtenerPosicion(this.parentNode,postits);
+        let contenedor = document.getElementsByTagName("section")[1];
+        let copia = this.parentNode.cloneNode(true);
+        copia.addEventListener("click", intercambio); //el evento no lo clona, si ejecuto más de dos veces el evento en el mismo post, me borra todo los elementos
+
+        if (posicion == 0) {
+          contenedor.appendChild(copia);
+          this.parentNode.remove();
         } else {
-          /* this.parentNode.style.order = Number(old) + 1;
-           */ //todo no se puede trabajar con order, hay que buscar la posición en el html.
-          this.parentNode.style.order = sig;
-          this.parentNode.nextSibling.style.order = old;
+          this.parentNode.remove();
+          contenedor.insertBefore(copia, contenedor.children[Number(posicion) - 1]);
         }
       }
+
+      function obtenerPosicion(div,postits){ 
+        let i;
+        for (i = 0; i < postits.length; i++) {
+          if ( div == postits[i]){
+            return i;//si pongo el return aqui, no necesito el break
+          }
+        }
+      }
+
     </script>
   </head>
   <body></body>
