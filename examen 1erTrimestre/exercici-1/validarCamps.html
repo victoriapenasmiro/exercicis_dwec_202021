@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exercici 1: validar camps</title>
+    <style>
+      * {
+        font-size: 1.02em;
+      }
+
+      #container {
+        background-color: #fff0f0;
+      }
+
+      label {
+        font-family: Arial, Helvetica, sans-serif;
+        width: 200px;
+        display: inline-block;
+        text-align: right;
+        margin: 8px;
+      }
+
+      input {
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 3px;
+      }
+
+      button {
+        margin-left: 200px;
+        padding: 5px 8px;
+      }
+
+      #resultat {
+        border: 1px solid black;
+        color: green;
+        font-size: 1.2rem;
+        padding: 10px 5px;
+        height: 30px;
+        margin-bottom: 2px;
+      }
+      #error {
+        border: 1px solid black;
+        color: red;
+        font-size: 1.2rem;
+        padding: 10px 5px;
+        height: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <label>Nom i Llinatges:</label>
+      <input id="nom" /><br />
+      <label>Correu Electronic:</label>
+      <input id="correu" /><br />
+      <button id="botoValidar">Validar</button>
+    </div>
+    <br />
+    <div id="resultat"></div>
+    <div id="error"></div>
+  </body>
+  <script>
+    // Escriu el teu codi aquí
+
+    window.onload = function () {
+      document
+        .getElementById("botoValidar")
+        .addEventListener("click", validarEmail);
+    };
+
+    function validarEmail() {
+      let valid = true;
+      let error = "";
+      let nom = document.getElementById("nom").value;
+      let email = document.getElementById("correu").value;
+      let arroba = 0;
+      let punto = 0;
+      if (nom.length <= 0 || nom.length > 20) {
+        valid = false;
+        error = "el nom ha de ser major a 0 caracters i menor a 20";
+      } else {
+        if (email.indexOf("@") != -1) {
+          //valido @
+          for (let i = email.indexOf("@"); i < email.length; i++) {
+            if (email.charAt(i) == "@") {
+              arroba++;
+            }
+            if (arroba > 1) {
+              valid = false;
+              error = "només pot haver un @ al email";
+              break;
+            }
+          }
+          if (valid) {
+            if (email.indexOf(".") != -1) {
+              //valido .
+              for (let i = email.indexOf("."); i < email.length; i++) {
+                if (email.charAt(i) == ".") {
+                  punto++;
+                }
+                if (punto > 1) {
+                  valid = false;
+                  error = "només pot haver un . al email";
+                  break;
+                }
+              }
+            }
+            if (valid && email.indexOf(".") < email.indexOf("@")) {
+              //valido que el . esté antes que la @
+              valid = false;
+              error = "el punt ha d'estar després de l'@";
+            }
+
+            if (valid && email.indexOf(" ") != -1) {
+              valid = false;
+              error = "el email no pot contenir espais en blanc";
+            }
+          }
+        } else {
+          valid = false;
+          error = "el email no es válid, falta un @";
+        }
+      }
+      esValido(valid, error);
+    }
+
+    function esValido(valido, error) {
+      if (valido) {
+        let obj = new Object();
+        obj.nom = document.getElementById("nom").value;
+        obj.email = document.getElementById("correu").value;
+
+        document.getElementById("resultat").innerHTML =
+          "Nom: " + obj.nom + ", email: " + obj.email;
+        document.getElementById("error").innerHTML = "";
+      } else {
+        document.getElementById("error").innerHTML = error;
+        document.getElementById("resultat").innerHTML = "";
+      }
+    }
+  </script>
+</html>

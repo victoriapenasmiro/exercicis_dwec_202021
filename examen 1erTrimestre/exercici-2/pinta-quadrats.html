@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercici 2: Pinta quadrats</title>
+    <style>
+      #myCanvas {
+        margin: 20px;
+        background-color: beige;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+  </body>
+
+  <script>
+    /***** dades per fer exercici *****/
+    var quadrats = [
+      { x: 30, y: 380 },
+      { x: 340, y: 150 },
+      { x: 150, y: 150 },
+      { x: 180, y: 170 },
+      { x: 120, y: 120 },
+      { x: -15, y: 320 },
+      { x: 90, y: 70 },
+      { x: 380, y: 250 },
+      { x: 60, y: 50 },
+      { x: 210, y: 250 },
+      { x: 240, y: 220 },
+      { x: 270, y: 240 },
+    ];
+    /**********************************/
+
+    // Escriu el teu codi aquí
+    //elimino los cuadrados que sobresalen del canvas
+
+    quadrats.forEach(eliminarCoordenada);
+
+    function eliminarCoordenada(value, index, array) {
+      if (value.x > 350 || value.y > 350 || value.x < 0 || value.y < 0) {
+        array.splice(index, 1);
+      }
+    }
+
+    let sortIncrease = function (a, b) {
+      return a.x - b.x;
+    };
+
+    console.log(quadrats.sort(sortIncrease));
+
+    var index = 0;
+    var iteraciones = setInterval(pintarCuadrado, 1000); //activo las iteraciones
+
+    function pintarCuadrado() {
+      if (index < quadrats.length) {
+        let c = document.getElementById("myCanvas");
+        let ctx = c.getContext("2d");
+        ctx.beginPath();
+        ctx.rect(quadrats[index].x, quadrats[index].y, 50, 50);
+        ctx.stroke();
+        ctx.closePath();
+        index++;
+      } else {
+        clearInterval(iteraciones); //paro las iteraciones
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exercici 3: Processar array</title>
+    <style>
+      .ciclista {
+        font-size: 1.2em;
+        border: 1px solid grey;
+        margin: 3px;
+        padding: 2px 3px;
+        width: 200px;
+      }
+
+      .taronja {
+        color: orange;
+      }
+      .verd {
+        color: green;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Ciclistes:</h1>
+    <div id="divCiclistes"></div>
+  </body>
+
+  <script>
+    /***** dades per fer exercici *****/
+    let ciclistes = [
+      "tom wellens",
+      "mathieu van poel",
+      "jonas rickaert",
+      "kristian sbaragli",
+      "dries de bondt",
+      "tim merlier",
+      "otto vergaerde",
+      "dylan van baarle",
+    ];
+    /************************/
+
+    // Escriu el teu codi aquí
+
+    window.onload = function () {
+      //Elimina els elements de l’array que contenguin el text  “van”
+      let arrayCiclistes = ciclistes.filter((value) => {
+        return value.indexOf("van") == -1 ? value : "";
+      });
+
+      arrayCiclistes.forEach(modificarItem);
+
+      //añadimos elementos al DOM
+      arrayCiclistes.forEach((item) => {
+        let contenedor = document.getElementById("divCiclistes");
+        let elem = document.createElement("p");
+        elem.classList.add("ciclista");
+        elem.innerHTML = item;
+        elem.classList.add(item.charAt(0) == "T" ? "taronja" : "verd");
+        contenedor.appendChild(elem);
+      });
+    };
+
+    function modificarItem(value, index, array) {
+      //Passa a majúscula la primera lletra del nom de cada ciclista
+      array[index] = value.charAt(0).toUpperCase() + value.substr(1);
+    }
+  </script>
+</html>
